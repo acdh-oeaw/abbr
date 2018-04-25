@@ -23,6 +23,10 @@ class Abbreviation(IdProvider):
     )
 
     @classmethod
+    def get_listview_url(self):
+        return reverse('words:abbreviation_browse')
+
+    @classmethod
     def get_createview_url(self):
         return reverse('words:abbreviation_create')
 
