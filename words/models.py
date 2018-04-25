@@ -24,7 +24,7 @@ class Abbreviation(IdProvider):
 
     @classmethod
     def get_createview_url(self):
-        return reverse('archiv:altname_create')
+        return reverse('words:abbreviation_create')
 
     def get_absolute_url(self):
         return reverse(

@@ -2,9 +2,31 @@ from dal import autocomplete
 from django import forms
 
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
+
 from crispy_forms.layout import Submit
 
 from .models import *
+
+
+class AbbreviationFormHelper(FormHelper):
+    def __init__(self, *args, **kwargs):
+        super(AbbreviationFormHelper, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.form_class = 'genericFilterForm'
+        self.form_method = 'GET'
+        self.helper.form_tag = False
+        self.add_input(Submit('Filter', 'Search'))
+        self.layout = Layout(
+            Fieldset(
+                'Basic search options',
+                'orth',
+                'expanded',
+                'lemma',
+                'pos',
+                css_id="basic_search_fields"
+                ),
+            )
 
 
 class AbbreviationForm(forms.ModelForm):
