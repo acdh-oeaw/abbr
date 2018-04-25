@@ -5,7 +5,7 @@ PROJECT_METADATA = {
     'title': 'ABBR',
     'author': 'Peter Andorfer',
     'subtitle': 'An application to store and resolve abbreviations',
-    'description': 'This application is used as a storage and curation plattform to\
+    'description': 'This application is used as a storage and curation platform to\
     collaboratively work on abbreviations found in any kind of texts and second.\
     Those curated abbrivations are exposed through an API so that\
     other projects can reuse the data.',
