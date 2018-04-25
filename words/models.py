@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from idprovider.models import IdProvider
 from vocabs.models import SkosConcept
 
@@ -20,6 +21,15 @@ class Abbreviation(IdProvider):
         SkosConcept, blank=True, null=True, on_delete=models.SET_NULL,
         verbose_name="POS", help_text="The abbreviation's Part of Speech tag"
     )
+
+    @classmethod
+    def get_createview_url(self):
+        return reverse('archiv:altname_create')
+
+    def get_absolute_url(self):
+        return reverse(
+            'words:abbreviation_detail', kwargs={'pk': self.id}
+        )
 
     def __str__(self):
         if self.expanded:
