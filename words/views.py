@@ -1,4 +1,9 @@
+import time
+import datetime
+import csv
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template import loader
 from webpage.utils import BaseCreateView, BaseUpdateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.detail import DetailView
@@ -11,6 +16,40 @@ from .models import Abbreviation
 from .forms import AbbreviationForm, AbbreviationFormHelper
 from .tables import AbbreviationTable
 from .filters import AbbreviationListFilter
+
+
+def serialize(modelclass):
+    fields = modelclass._meta.get_fields()
+    serialized = []
+    for x in fields:
+        if x.get_internal_type() == "ManyToManyField":
+            attrs = getattr(modelclass, x.name)
+            values = "|".join([y[1] for y in attrs.values_list()])
+            key_value = values
+        else:
+            key_value = getattr(modelclass, x.name)
+        serialized.append(key_value)
+    return serialized
+
+
+class AbbreviationDownloadView(GenericListView):
+    model = Abbreviation
+    table_class = AbbreviationTable
+    template_name = 'browsing/edition_list_generic.html'
+    filter_class = AbbreviationListFilter
+    formhelper_class = AbbreviationFormHelper
+
+    def render_to_response(self, context):
+        timestamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d-%H-%M-%S')
+        response = HttpResponse(content_type='text/csv')
+        filename = "{}".format(timestamp)
+        response['Content-Disposition'] = 'attachment; filename="{}.csv"'.format(filename)
+        writer = csv.writer(response, delimiter=",")
+        writer.writerow([x.name for x in Abbreviation._meta.get_fields()])
+        for x in self.get_queryset():
+            row = serialize(x)
+            writer.writerow(row)
+        return response
 
 
 class AbbreviationListView(GenericListView):

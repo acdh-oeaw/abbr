@@ -16,4 +16,5 @@ urlpatterns = [
         name='abbreviation_delete'),
     url(r'^delete/(?P<pk>[0-9]+)$', views.AbbreviationDelete.as_view(),
         name='abbreviation_delete'),
+    url(r'download-csv/$', views.AbbreviationDownloadView.as_view(), name='dl_csv_link'),
 ]

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core import serializers
 from django.urls import reverse
 from idprovider.models import IdProvider
 from vocabs.models import SkosConcept
@@ -21,6 +22,10 @@ class Abbreviation(IdProvider):
         SkosConcept, blank=True, null=True, on_delete=models.SET_NULL,
         verbose_name="POS", help_text="The abbreviation's Part of Speech tag"
     )
+
+    @classmethod
+    def dl_csv_link(self):
+        return reverse('words:dl_csv_link')
 
     @classmethod
     def get_listview_url(self):

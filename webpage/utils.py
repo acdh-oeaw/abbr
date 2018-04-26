@@ -68,6 +68,10 @@ class GenericListView(SingleTableView):
             context['create_view_link'] = self.model.get_createview_url()
         except AttributeError:
             context['create_view_link'] = None
+        try:
+            context['dl_csv_link'] = self.model.dl_csv_link()
+        except AttributeError:
+            context['dl_csv_link'] = None
         return context
 
 
