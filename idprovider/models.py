@@ -6,4 +6,4 @@ class IdProvider(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.id
+        return "{}".format(self.id)
