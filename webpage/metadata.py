@@ -14,5 +14,6 @@ PROJECT_METADATA = {
     'purpose_en': 'The purpose of ABBR is the curation and publication of abbreviations.',
     'version': '0.0.1',
     'matomo_id': '85',
-    'matomo_url': '//piwik.apollo.arz.oeaw.ac.at/'
+    'matomo_url': '//piwik.apollo.arz.oeaw.ac.at/',
+    'app_type': 'service',
 }
