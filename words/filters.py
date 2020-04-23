@@ -5,9 +5,15 @@ from vocabs.models import SkosConcept
 
 class AbbreviationListFilter(django_filters.FilterSet):
     orth = django_filters.CharFilter(
+        lookup_expr='exact',
+        help_text='exact search',
+        label='exact and case sensitive search'
+        )
+    orth_fuzzy = django_filters.CharFilter(
+        field_name="orth",
         lookup_expr='icontains',
-        help_text=Abbreviation._meta.get_field('orth').help_text,
-        label=Abbreviation._meta.get_field('orth').verbose_name
+        help_text='Fuzzy search',
+        label='Fuzzy search and ignore case'
         )
     expanded = django_filters.CharFilter(
         lookup_expr='icontains',

@@ -21,6 +21,7 @@ class AbbreviationFormHelper(FormHelper):
             Fieldset(
                 'Basic search options',
                 'orth',
+                'orth_fuzzy',
                 'expanded',
                 'lemma',
                 'pos',
