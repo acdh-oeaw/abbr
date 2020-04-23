@@ -28,6 +28,7 @@ mysql.py
 server.py
 postgres.py
 dev_secret.py
+local.py
 
 # documentation build files
 
@@ -37,3 +38,4 @@ dev_secret.py
 /arche/data/fileType.json
 /arche/data/fileList.json
 /myenv
+*.xlsx

@@ -4,6 +4,12 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Fieldset, Div, MultiField, HTML
 from django_tables2 import SingleTableView, RequestConfig
 
+from django.conf import settings
+from . metadata import PROJECT_METADATA as PM
+
+SHARED_URL = settings.SHARED_URL
+PROJECT_METADATA = PM
+
 
 class GenericFilterFormHelper(FormHelper):
 
